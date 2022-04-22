@@ -1,23 +1,22 @@
 #include "main.h"
 #include <stdlib.h>
-#include <stdarg.h>
 
 /**
- * check_for_specifiers - checks if there is a valid format specifer
+ * check_for_specifiers - checks if there is a valid format specifier
  * @format: possible format specifier
  *
  * Return: pointer to valid function or NULL
-*/
-int (*check_for_specifiers(const char *format))(va_list)
+ */
+static int (*check_for_specifiers(const char *format))(va_list)
 {
-	int i = 0;
+	unsigned int i;
 	print_t p[] = {
 		{"c", print_c},
 		{"s", print_s},
 		{"i", print_i},
 		{"d", print_d},
-		{"b", print_b},
 		{"u", print_u},
+		{"b", print_b},
 		{"o", print_o},
 		{"x", print_x},
 		{"X", print_X},
@@ -25,31 +24,33 @@ int (*check_for_specifiers(const char *format))(va_list)
 		{"S", print_S},
 		{"r", print_r},
 		{"R", print_R},
-		{NULL, NULL}
-	};
+		{NULL, NULL}};
 
-	for (; p[i].t != NULL; i++)
+	for (i = 0; p[i].t != NULL; i++)
 	{
 		if (*(p[i].t) == *format)
+		{
 			break;
+		}
 	}
 	return (p[i].f);
 }
 
 /**
- * _printf - function for printing format
- * @format: list arguments for printing
+ * _printf - prints anything by sAM AND ESTHER
+ * @format: list of argument types passed to the function
+ *
  * Return: number of characters printed
  */
 int _printf(const char *format, ...)
 {
 	unsigned int i = 0, count = 0;
-	va_list ap;
+	va_list valist;
 	int (*f)(va_list);
 
 	if (format == NULL)
 		return (-1);
-	va_start(ap, format);
+	va_start(valist, format);
 	while (format[i])
 	{
 		for (; format[i] != '%' && format[i]; i++)
@@ -62,7 +63,7 @@ int _printf(const char *format, ...)
 		f = check_for_specifiers(&format[i + 1]);
 		if (f != NULL)
 		{
-			count += f(ap);
+			count += f(valist);
 			i += 2;
 			continue;
 		}
@@ -75,12 +76,6 @@ int _printf(const char *format, ...)
 		else
 			i++;
 	}
-	va_end(ap);
+	va_end(valist);
 	return (count);
 }
-
-
-
-
-
-
