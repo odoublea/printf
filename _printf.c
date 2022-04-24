@@ -10,7 +10,6 @@ int _printf(const char *format, ...)
 
 	while (format[i] != '\0')
 	{
-		_putchar(format[i]);
 
 		if (format[i] != '%')
 		    _putchar(format[i]);
@@ -18,7 +17,10 @@ int _printf(const char *format, ...)
 		{
 			/* format[i] == '%' */
 			if (format[i+1] == 'c')
-			_putchar(va_arg(args, int));
+			{
+				_putchar(va_arg(args, int));
+				i++;
+			}
 		}
 
 		i++;
