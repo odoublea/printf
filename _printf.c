@@ -30,7 +30,7 @@ int _printf(const char *format, ...)
 				j = 0;
 				while (str[j] != '\0')
 				{
-					_putchar(str[j])
+					_putchar(str[j]);
 					j++;
 				}
 			}
