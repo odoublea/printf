@@ -3,8 +3,8 @@
 
 int main(void)
 {
-	_printf("Hello %c World\n", 'B');
-	printf("Hello %c World\n", 'C');
+	_printf("Hello %s\n", "Dipo");
+	printf("Hello %s\n", "Kenny");
 
 	return (0);
 }
