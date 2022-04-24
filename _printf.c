@@ -1,13 +1,13 @@
 #include "main.h"
 #include <stdarg.h>
 
-int _printf(const char * const format, ...)
+int _printf(const char *format, ...)
 {
 	int i = 0;
 
 	while (format[i] != '\0')
 	{
-		_putchat(format[i]);
+		_putchar(format[i]);
 		i++;
 	}
 
