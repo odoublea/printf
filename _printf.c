@@ -13,6 +13,7 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int i = 0, j = 0;
+	int n_displayed = 0;
 	char *str = NULL;
 
 	va_start(args, format);
@@ -21,7 +22,10 @@ int _printf(const char *format, ...)
 	{
 
 		if (format[i] != '%')
+		{
 			_putchar(format[i]);
+			n_displayed++;
+		}
 		else
 		{
 			/* format[i] == '%' */
@@ -38,6 +42,7 @@ int _printf(const char *format, ...)
 				while (str[j] != '\0')
 				{
 					_putchar(str[j]);
+					n_displayed++;
 					j++;
 				}
 			}
@@ -45,6 +50,7 @@ int _printf(const char *format, ...)
 			{
 				i++;
 				_putchar('%');
+				n_displayed++;
 			}
 		}
 
@@ -53,5 +59,5 @@ int _printf(const char *format, ...)
 
 	va_end(args);
 
-	return (0);
+	return (n_displayed);
 }
