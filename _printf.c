@@ -27,13 +27,18 @@ int _printf(const char *format, ...)
 			_putchar(format[i]);
 			n_displayed++;
 		}
+		else if (format[i + 1] == '%')
+		{
+			i++;
+			_printchar('%');
+			n_displayed += func(args);
+		}
 		else
 		{
 			func = _select_func(format[i + 1]);
 			if (func != NULL)
 			{
-				func(args);
-				n_displayed++;
+				n_displayed += func(args);
 				i++;
 			}
 		}
