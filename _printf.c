@@ -31,38 +31,27 @@ int _printf(const char *format, ...)
 			/* format[i] == '%' */
 			if (format[i + 1] == 'c')
 			{
-				_putchar(va_arg(args, int));
+				_printchar(va_arg(args, int));
+				n_displayed++;
 				i++;
 			}
 			else if (format[i + 1] == 's')
 			{
 				i++;
 				str = va_arg(args, char *);
-				j = 0;
-				while (str[j] != '\0')
-				{
-					_putchar(str[j]);
-					n_displayed++;
-					j++;
-				}
+				_print_str(str);
 			}
-			else if (format[i+1] == '%')
+			else if (format[i + 1] == '%')
 			{
 				i++;
-				_putchar('%');
+				_printchar('%');
 				n_displayed++;
 			}
-			else if (format[i+1] == 'd')
+			else if (format[i + 1] == 'd')
 			{
 				i++;
 				num = va_arg(args, int);
-
-				while (num > 0)
-				{
-					_putchar('0' + (num % 10));
-					num /=10;
-					n_displayed++;
-				}
+				/* _print_integer(num) */
 			}
 		}
 
