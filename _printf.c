@@ -49,7 +49,7 @@ int _printf(const char *format, ...)
 			else if (format[i + 1] == 'd')
 			{
 				i++;
-				print_integer(va_arg(args, int));
+				_print_int(va_arg(args, int));
 			}
 		}
 
