@@ -1,6 +1,6 @@
 #include "main.h"
 
-void _print_str(char *s)
+int _print_str(char *s)
 {
     int j = 0;
 
