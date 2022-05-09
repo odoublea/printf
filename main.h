@@ -1,10 +1,12 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
+#include <stdarg.h>
 
 int _putchar(char c);
 int _printf(const char *format, ...);
-int _printchar(char c);
-int _print_str(char *s);
-int _print_int(int n);
+int _printchar(va_list args);
+int _print_str(va_list args);
+int _print_int(va_list args);
+int (*_select_func(char c))(va_list);
 
 #endif /* _MAIN_H_ */

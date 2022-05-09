@@ -1,8 +1,10 @@
 #include "main.h"
+#include <stdarg.h>
 
-int _print_str(char *s)
+int _print_str(va_list args)
 {
     int j = 0;
+    char *s = va_arg(args, char *);
 
     while (s[j] != '\0')
     {

@@ -28,31 +28,9 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			/* format[i] == '%' */
-			if (format[i + 1] == 'c')
-			{
-				_printchar(va_arg(args, int));
-				n_displayed++;
-				i++;
-			}
-			else if (format[i + 1] == 's')
-			{
-				i++;
-				str = va_arg(args, char *);
-				_print_str(str);
-			}
-			else if (format[i + 1] == '%')
-			{
-				i++;
-				_printchar('%');
-				n_displayed++;
-			}
-			else if (format[i + 1] == 'd')
-			{
-				i++;
-				num = va_arg(args, int);
-				/* _print_integer(num) */
-			}
+			_select_func(format[i + 1])(args);
+			i++;
+			n_displayed++;
 		}
 
 		i++;
