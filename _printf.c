@@ -33,8 +33,8 @@ int _printf(const char *format, ...)
 			if (func != NULL)
 			{
 				func(args);
-				i++;
 				n_displayed++;
+				i++;
 			}
 		}
 
