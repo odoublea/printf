@@ -29,7 +29,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			func = _select_func(format[i + 1])(args);
+			func = _select_func(format[i + 1]);
 			if (func != NULL)
 			{
 				func(args);
