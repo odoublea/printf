@@ -15,6 +15,7 @@ int _printf(const char *format, ...)
 	int i = 0, j = 0, num = 0;
 	int n_displayed = 0;
 	char *str = NULL;
+	int (*func)(va_list);
 
 	va_start(args, format);
 
@@ -28,9 +29,13 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			_select_func(format[i + 1])(args);
-			i++;
-			n_displayed++;
+			func = _select_func(format[i + 1])(args);
+			if (func != NULL)
+			{
+				func(args);
+				i++;
+				n_displayed++;
+			}
 		}
 
 		i++;
