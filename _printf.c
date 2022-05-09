@@ -15,7 +15,6 @@ int _printf(const char *format, ...)
 	int i = 0, j = 0, num = 0;
 	int n_displayed = 0;
 	char *str = NULL;
-	int (*func)(va_list);
 
 	va_start(args, format);
 
@@ -29,11 +28,28 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			func = _select_func(format[i + 1]);
-			if (func != NULL)
+			/* format[i] == '%' */
+			if (format[i + 1] == 'c')
 			{
-				n_displayed += func(args);
+				_printchar(va_arg(args, int));
+				n_displayed++;
 				i++;
+			}
+			else if (format[i + 1] == 's')
+			{
+				i++;
+				_print_str(va_arg(args, char *));
+			}
+			else if (format[i + 1] == '%')
+			{
+				i++;
+				_printchar('%');
+				n_displayed++;
+			}
+			else if (format[i + 1] == 'd')
+			{
+				i++;
+				print_integer(va_arg(args, int));
 			}
 		}
 

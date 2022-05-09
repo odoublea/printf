@@ -1,9 +1,6 @@
 #include "main.h"
-#include <stdarg.h>
 
-int _printchar(va_list args)
+int _printchar(char c)
 {
-    char c = va_arg(args, int);
-
     return (_putchar(c));
 }
