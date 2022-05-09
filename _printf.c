@@ -12,7 +12,7 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i = 0, j = 0;
+	int i = 0, j = 0, num = 0;
 	int n_displayed = 0;
 	char *str = NULL;
 
@@ -51,6 +51,18 @@ int _printf(const char *format, ...)
 				i++;
 				_putchar('%');
 				n_displayed++;
+			}
+			else if (format[i+1] == 'd')
+			{
+				i++;
+				num = va_arg(args, int);
+
+				while (num > 0)
+				{
+					_putchar('0' + (num % 10));
+					num /=10;
+					n_displayed++;
+				}
 			}
 		}
 
