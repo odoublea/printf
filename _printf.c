@@ -37,10 +37,9 @@ int _printf(const char *format, ...)
 			else if (format[i + 1] == 's')
 			{
 				i++;
-<<<<<<< HEAD
+
 				_print_str(va_arg(args, char *));
-=======
-				str = va_arg(args, char *);
+
 				j = 0;
 				while (str[j] != '\0')
 				{
@@ -48,29 +47,25 @@ int _printf(const char *format, ...)
 					n_displayed++;
 					j++;
 				}
->>>>>>> parent of b0b674b (print functions)
 			}
-			else if (format[i+1] == '%')
+			else if (format[i + 1] == '%')
 			{
 				i++;
 				_putchar('%');
 				n_displayed++;
 			}
-			else if (format[i+1] == 'd')
+			else if (format[i + 1] == 'd')
 			{
 				i++;
-<<<<<<< HEAD
+
 				_print_int(va_arg(args, int));
-=======
-				num = va_arg(args, int);
 
 				while (num > 0)
 				{
 					_putchar('0' + (num % 10));
-					num /=10;
+					num /= 10;
 					n_displayed++;
 				}
->>>>>>> parent of b0b674b (print functions)
 			}
 		}
 
