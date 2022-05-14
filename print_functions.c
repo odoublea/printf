@@ -22,25 +22,25 @@ int print_char(va_list arg)
 int print_int(va_list arg)
 {
 
-	unsigned int divisor = 1, i, resp, charPrinted = 0;
+	unsigned int divisor = 1, i, resp, charDisplayed = 0;
 	int n = va_arg(arg, int);
 
 	if (n < 0)
 	{
 		_putchar('-');
-		charPrinted++;
+		charDisplayed++;
 		n *= -1;
 	}
 
 	for (i = 0; n / divisor > 9; i++, divisor *= 10)
 		;
 
-	for (; divisor >= 1; n %= divisor, divisor /= 10, charPrinted++)
+	for (; divisor >= 1; n %= divisor, divisor /= 10, charDisplayed++)
 	{
 		resp = n / divisor;
 		_putchar('0' + resp);
 	}
-	return (charPrinted);
+	return (charDisplayed);
 }
 
 /**

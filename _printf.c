@@ -1,7 +1,39 @@
 #include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdarg.h>
+
+/**
+ * printIdentifiers - prints special characters
+ * @next: character after the %
+ * @arg: argument for the indentifier
+ * Return: the number of characters printed
+ * (excluding the null byte used to end output to strings)
+ */
+
+int printIdentifiers(char next, va_list arg)
+{
+	int functsIndex;
+
+	identifierStruct functs[] = {
+		{"c", print_char},
+		{"s", print_str},
+		{"d", print_int},
+		{"i", print_int},
+		{"u", print_unsigned},
+		{"b", print_unsignedToBinary},
+		{"o", print_oct},
+		{"x", print_hex},
+		{"X", print_HEX},
+		{"S", print_STR},
+		{NULL, NULL}};
+
+	for (functsIndex = 0; functs[functsIndex].indentifier != NULL; functsIndex++)
+	{
+		if (functs[functsIndex].indentifier[0] == next)
+			return (functs[functsIndex].printer(arg));
+	}
+	return (0);
+}
 
 /**
  * _printf - mimic printf from stdio
@@ -16,87 +48,44 @@
 
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int i = 0, j = 0;
-	char *str = NULL;
-	int charPrinted = 0;
+	unsigned int i;
+	int identifierPrinted = 0, charDisplayed = 0;
+	va_list arg;
 
-	va_start(args, format);
+	va_start(arg, format);
+	if (format == NULL)
+		return (-1);
 
-	while (format[i] != '\0')
+	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] != '%')
 		{
 			_putchar(format[i]);
-			charPrinted++;
+			charDisplayed++;
+			continue;
 		}
-		else
+		if (format[i + 1] == '%')
 		{
-			if (format[i + 1] == 'c')
-			{
-				_putchar(va_arg(args, int));
-				charPrinted++;
-				i++;
-			}
-			else if (format[i + 1] == 's')
-			{
-				i++;
-				str = va_arg(args, char *);
-				while (str[j] != '\0')
-					;
-				{
-					_putchar(str[j]);
-					charPrinted++;
-					j++;
-				}
-				j++;
-			}
-			else if (format[i + 1] == '%')
-			{
-				i++;
-				_putchar('%');
-				charPrinted++;
-			}
+			_putchar('%');
+			charDisplayed++;
+			i++;
+			continue;
 		}
-		i++;
-	}
-
-	/*
-		if (format == NULL)
+		if (format[i + 1] == '\0')
 			return (-1);
 
-		for (i = 0; format[i] != '\0'; i++)
+		identifierPrinted = printIdentifiers(format[i + 1], arg);
+		if (identifierPrinted == -1 || identifierPrinted != 0)
+			i++;
+		if (identifierPrinted > 0)
+			charDisplayed += identifierPrinted;
+
+		if (identifierPrinted == 0)
 		{
-			if (format[i] != '%')
-			{
-				_putchar(format[i]);
-				charPrinted++;
-				continue;
-			}
-			if (format[i + 1] == '%')
-			{
-				_putchar('%');
-				charPrinted++;
-				i++;
-				continue;
-			}
-			if (format[i + 1] == '\0')
-				return (-1);
-
-			identifierPrinted = printIdentifiers(format[i + 1], arg);
-			if (identifierPrinted == -1 || identifierPrinted != 0)
-				i++;
-			if (identifierPrinted > 0)
-				charPrinted += identifierPrinted;
-
-			if (identifierPrinted == 0)
-			{
-				_putchar('%');
-				charPrinted++;
-			}
+			_putchar('%');
+			charDisplayed++;
 		}
-		*/
-
-	va_end(args);
-	return (charPrinted);
+	}
+	va_end(arg);
+	return (charDisplayed);
 }
