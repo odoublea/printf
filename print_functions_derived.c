@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "main.h"
 #include <stdarg.h>
 #include <stdlib.h>
 
@@ -10,15 +10,14 @@
 int print_unsignedToBinary(va_list arg)
 {
 
-unsigned int n = va_arg(arg, unsigned int);
-unsigned int printed;
+	unsigned int n = va_arg(arg, unsigned int);
+	unsigned int printed;
 
-print_binary(n, &printed);
-print_binary(n, &printed);
+	print_binary(n, &printed);
+	print_binary(n, &printed);
 
-return (printed);
+	return (printed);
 }
-
 
 /**
  * print_oct - prints number in octal base.
@@ -73,7 +72,7 @@ int print_unsignedIntToHex(unsigned int num, char _case)
 	char *numhex;
 
 	for (num2 = num; num2 != 0; nbrCharacters++, num2 /= 16)
-	;
+		;
 
 	numhex = malloc(nbrCharacters);
 	for (i = 0; num != 0; i++)
